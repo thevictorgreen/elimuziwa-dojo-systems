@@ -1,0 +1,620 @@
+{
+  "module_name":"Metaskills - Boot Management",
+  "commands_used":[
+    {
+      "cmd":"",
+      "use":"",
+      "provided_by":"",
+      "examples":[
+        {
+          "what":"",
+          "how2":""
+        }
+      ]
+    }
+  ],
+  "config_files_used":[],
+  "additional_packages":[],
+  "tasks": [
+    {
+      "task":"List all available services on a linux system",
+      "steps": [
+        {
+          "cmd":"systemctl list-units --type service --all",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"List all running services on a linux system",
+      "steps": [
+        {
+          "cmd":"systemctl list-units --type service --all --state running",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"List all failed services on a linux system",
+      "steps": [
+        {
+          "cmd":"systemctl list-units --type service --all --state failed",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Check the status of a running service",
+      "steps": [
+        {
+          "cmd":"systemctl list-units --type service --all --state running",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl status -l service.service",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Restart, stop, and start a running service",
+      "steps": [
+        {
+          "cmd":"systemctl status -l service.service",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl restart service.service",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl stop service.service",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl start service.service",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl status -l service.service",
+          "why":"reason for running"
+        },
+      ]
+    },
+    {
+      "task":"Disable and enable a running service",
+      "steps": [
+        {
+          "cmd":"systemctl status -l service.service",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl stop service.service",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl disable service.service",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl status -l service.service",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl enable service.service",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl status -l service.service",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Prevent a service from being enabled",
+      "steps": [
+        {
+          "cmd":"systemctl status -l service.service",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl stop service.service",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl disable service.service",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl mask service.service",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl status -l service.service",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Start a masked service",
+      "steps": [
+        {
+          "cmd":"systemctl status -l service.service",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl unmask service.service",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl enable service.service",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl start service.service",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl status -l service.service",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Determine whether a service is enabled, active, or failed",
+      "steps": [
+        {
+          "cmd":"systemctl is-enabled service.service",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl is-active service.service",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl is-failed service.service",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"List enabled then disabled service unit files",
+      "steps": [
+        {
+          "cmd":"systemctl list-unit-files --type service --all --state enabled",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl list-unit-files --type service --all --state disabled",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display the unit file of a service",
+      "steps": [
+        {
+          "cmd":"systemctl cat service.service",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display the service dependency tree of a service",
+      "steps": [
+        {
+          "cmd":"systemctl list-dependencies service.service",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display all startup properties of a service",
+      "steps": [
+        {
+          "cmd":"systemctl show service.service",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display a single starup property of a service",
+      "steps": [
+        {
+          "cmd":"systemctl show service.service -p property",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Override a service startup property",
+      "steps": [
+        {
+          "cmd":"systemctl edit service.service",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"property=value",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Undo service property override",
+      "steps": [
+        {
+          "cmd":"rm -rf /etc/systemd/system/service.service.d",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Modify an entire service unit file",
+      "steps": [
+        {
+          "cmd":"systemctl edit service.service --full",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Undo modifications in service unit file",
+      "steps": [
+        {
+          "cmd":"rm -rf /etc/systemd/system/nginx.service",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display all active then inactive system targets",
+      "steps": [
+        {
+          "cmd":"systemctl list-units --type target --all --state active",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl list-units --type target --all --state inactive",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display all enabled then disabled target unit files",
+      "steps": [
+        {
+          "cmd":"systemctl list-unit-files --type target --all --state enabled",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl list-unit-files --type target --all --state disabled",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"List all dependencies on a system target",
+      "steps": [
+        {
+          "cmd":"systemctl list-dependencies target.target",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display the default system target",
+      "steps": [
+        {
+          "cmd":"systemctl get-default",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Change the default system target to graphical then multi-user",
+      "steps": [
+        {
+          "cmd":"systemctl set-default graphical.target",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl set-default multi-user.target",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Perform a one time change of the default system target. Toggle between poweroff, rescue, multi-user, graphical, and reboot",
+      "steps": [
+        {
+          "cmd":"systemctl isolate poweroff.target",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl isolate rescue.target",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl isolate multi-user.target",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl isolate graphical.target",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl isolate reboot.target",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Change the default timeout on the grub2 bootmenu to 15 seconds",
+      "steps": [
+        {
+          "cmd":"vim /etc/default/grub",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"GRUB_TIMEOUT=20",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"grub2-mkconfig -o /boot/grub2/grub.cfg",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl isolate reboot.target",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display all startup message during the boot sequence",
+      "steps": [
+        {
+          "cmd":"vim /etc/default/grub",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"GRUB_CMDLINE_LINUX=<remove rhgb and quiet>",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"grub2-mkconfig -o /boot/grub2/grub.cfg",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl isolate reboot.target",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Use enable eth0 nic device naming in the kernel",
+      "steps": [
+        {
+          "cmd":"vim /etc/default/grub",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"GRUB_CMDLINE_LINUX=<add biosdevname=0 net.ifnames=0>",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"grub2-mkconfig -o /boot/grub2/grub.cfg",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl isolate reboot.target",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"nmcli device status",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display the default grub2 menuentry",
+      "steps": [
+        {
+          "cmd":"grub2-editenv list",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display all possible grub2 menuentries",
+      "steps": [
+        {
+          "cmd":"awk -F\\' '$1==\"menuentry \" {print i++ \" : \" $2}' /etc/grub2.cfg",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"grep \"^menuentry\" /boot/grub2/grub.cfg | cut -d \"'\" -f2",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Change the default grub2 menuentry",
+      "steps": [
+        {
+          "cmd":"awk -F\\' '$1==\"menuentry \" {print i++ \" : \" $2}' /etc/grub2.cfg",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"grub2-set-default <menuentry>",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"grub2-mkconfig -o /boot/grub2/grub.cfg",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl isolate reboot.target",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"From the grub2 bootmenu, enter emergency mode. Make sure / is readable writable",
+      "steps": [
+        {
+          "cmd":"control + e",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"linux16",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"control + e",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemd.unit=emergency.target",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"control + x",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl list-units --type service --all --state active",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mount -o remount,rw /",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"From the grub2 bootmenu, enter rescue mode. Make sure / is readable writable",
+      "steps": [
+        {
+          "cmd":"control + e",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"linux16",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"control + e",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemd.unit=rescue.target",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"control + x",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl list-units --type service --all --state active",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mount -o remount,rw /",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Change root password to newuser",
+      "steps": [
+        {
+          "cmd":"from grub menu press 'e'",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"at the end of linux16 line type 'rd.break'",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ctl + x",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mount -o remount,rw /sysroot",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"chroot sysroot",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"passwd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"touch /.autorelabel",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ctl + d",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ctl + d",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Boot from a rescue disk and reinstall grub2",
+      "steps": [
+        {
+          "cmd":"Boot from rescue disk",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"chroot /mnt/sysimage",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"grub2-install /dev/sda",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Boot from a rescue disk and reinstall the initramfs",
+      "steps": [
+        {
+          "cmd":"Boot from rescue disk",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"chroot /mnt/sysimage",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"dracut --force",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Boot from a rescue disk and mount the root filesystem",
+      "steps": [
+        {
+          "cmd":"Boot from rescue disk",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl -xb",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mount -o remount,rw /",
+          "why":"reason for running"
+        }
+      ]
+    }
+  ]
+}

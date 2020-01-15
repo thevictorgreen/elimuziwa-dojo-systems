@@ -1,0 +1,182 @@
+{
+  "module_name":"Scheduling Tasks",
+  "commands_used":[
+    {
+      "cmd":"",
+      "use":"",
+      "provided_by":"",
+      "examples":[
+        {
+          "what":"",
+          "how2":""
+        }
+      ]
+    }
+  ],
+  "config_files_used":[],
+  "additional_packages":[],
+  "tasks": [
+    {
+      "task":"Schedule a 1 time task",
+      "steps": [
+        {
+          "cmd":"systemctl status atd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum whatprovides atd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"repoquery at-3.1.13-22.el7.x86_64",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"repoquery -i at-3.1.13-22.el7.x86_64",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"repoquery -l at-3.1.13-22.el7.x86_64",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yumdownloader at-3.1.13-22.el7.x86_64",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"rpm -qp at-3.1.13-22.el7.x86_64.rpm",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"rpm -qpl at-3.1.13-22.el7.x86_64.rpm",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"rpm -qpc at-3.1.13-22.el7.x86_64.rpm",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"rpm -qpd at-3.1.13-22.el7.x86_64.rpm",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"rpm -qp --scripts at-3.1.13-22.el7.x86_64.rpm",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum localinstall at-3.1.13-22.el7.x86_64.rpm",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum list installed at",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl status atd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl start atd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl enable atd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl status atd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum whatprovides tmux",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum install tmux-1.8-4.el7.x86_64",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"tmux new -s processes",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ctl +b +\"",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ctl +b + downarrow",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"tail -f /var/log/messages",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ctl +b + uparrow",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"logger test message",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"date",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"at 2 minutes later",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"logger hello world",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ctl + d",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"atq",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"atrm id (to remove)",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Schedule a recurring cron job",
+      "steps": [
+        {
+          "cmd":"tail -f /var/log/messages |grep root:",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"crontab -l",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"crontab -e",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"*/2 * * * * logger My Message $(date)",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"crontab -l",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"crontab -r",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"crontab -l",
+          "why":"reason for running"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,767 @@
+{
+  "module_name":"Practice Exam",
+  "commands_used":[
+    {
+      "cmd":"",
+      "use":"",
+      "provided_by":"",
+      "examples":[
+        {
+          "what":"",
+          "how2":""
+        }
+      ]
+    }
+  ],
+  "config_files_used":[
+    {
+      "filename":"",
+      "location":"",
+      "use":"",
+      "mod_by_user":"",
+      "mod_by_kernel":""
+    }
+  ],
+  "additional_packages":[
+    {
+      "name":"",
+      "repo":""
+    }
+  ],
+  "tasks": [
+    {
+      "task":"Add a 1GB swap partition (make it persistent)",
+      "steps": [
+        {
+          "cmd":"free -mh",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"parted /dev/sdc print",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"fdisk /dev/sdc",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"n",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"+1G",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"t",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"l",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"82",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"w",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"partprobe",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mkswap /dev/sdc1",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"swapon /dev/sdc1",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"blkid /dev/sdc1",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vim /etc/fstab",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"UUID=blkid-from-dev-sdc1 swap swap defaults 0 0",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"free -mh",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Create a VFAT logical volume (persistent)",
+      "steps": [
+        {
+          "cmd":" mkfs. <tab>",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum whatprovides mkfs.vfat",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum install dosfstools-3.0.20-9.el7.x86_64",
+          "why":"reason for running"
+        }
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"parted /dev/sdb print",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"fdisk /dev/sdb",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"m",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"p",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"n",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"p",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"1",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"<enter>",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"t",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"l",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"b",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"w",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"partprobe",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mkfs.vfat /dev/sdb1",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mount /dev/sdb1 /mnt",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mount",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"umount /mnt",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mkdir /transfer",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vi /etc/fstab",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"/dev/sdc1 /transfer vfat defaults 0 0",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mount -a",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mount",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"reboot",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mount",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Create a 1GB Logical Volume with an ext4 filesystem at mount point /data100. Use an entire block device but make sure your lvm is no larger that 1GB",
+      "steps": [
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"Select an empty block device. We will use /dev/sda only as a reference from this point forward.",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"parted /dev/sda print",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"fdisk /dev/sda",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"n",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"p",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"<enter for default partition number>",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"<enter for default start>",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"+2G",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"t",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"l",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"8e",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"p",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"repeat last 10 steps making partitions of +1G",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"w",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"partprobe",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"parted /dev/sda print",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"pvs",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"pvcreate /dev/sda1",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"pvcreate /dev/sda2",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"pvcreate /dev/sda3",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"pvcreate /dev/sda4",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"pvs",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vgs",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vgcreate vg_data100 /dev/sda1 /dev/sda2 /dev/sda3 /dev/sda4",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vgs",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lvcreate -n lv_data100 -L 1G vg_data100",
+          "why":"reason for running"
+        }
+        {
+          "cmd":"lvs",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"pvdisplay",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vgdisplay",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lvdisplay",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mkfs.ext4 /dev/vg_data100/lv_data100",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mkdir /data1001",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mount /dev/vg_data100/lv_data100 /mnt",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"umount /mnt",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"blkid /dev/vg_data100/lv_data100",
+          "why":"get uuid "
+        },
+        {
+          "cmd":"vim /etc/fstab",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"UUID=<UUID of block device> /data100 ext4 defaults 0 0",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"esc,wq!",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mount -a",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mount",
+          "why":"reason for running"
+        }
+        ,
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"df -hT",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Create a 1GB Logical Volume with an xfs filesystem at mount point /data200. Use an entire block device but make sure your lvm is no larger that 1GB",
+      "steps": [
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"Select an empty block device. We will use /dev/sda only as a reference from this point forward.",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"parted /dev/sda print",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"fdisk /dev/sda",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"n",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"p",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"<enter for default partition number>",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"<enter for default start>",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"+2G",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"t",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"l",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"8e",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"p",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"repeat last 10 steps making partitions of +1G",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"w",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"partprobe",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"parted /dev/sda print",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"pvs",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"pvcreate /dev/sda1",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"pvcreate /dev/sda2",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"pvcreate /dev/sda3",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"pvcreate /dev/sda4",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"pvs",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vgs",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vgcreate vg_data200 /dev/sda1 /dev/sda2 /dev/sda3 /dev/sda4",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vgs",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lvcreate -n lv_data200 -L 1G vg_data200",
+          "why":"reason for running"
+        }
+        {
+          "cmd":"lvs",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"pvdisplay",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vgdisplay",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lvdisplay",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mkfs.xfs /dev/vg_data200/lv_data200",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mkdir /data200",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mount /dev/vg_data200/lv_data200 /mnt",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"umount /mnt",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"blkid /dev/vg_data200/lv_data200",
+          "why":"copy uuid"
+        },
+        {
+          "cmd":"vim /etc/fstab",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"UUID=<UUID of block device> /data200 xfs defaults 0 0",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"esc,wq!",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mount -a",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mount",
+          "why":"reason for running"
+        }
+        ,
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"df -hT",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Increase the size of an ext4 Volume by 1GB",
+      "steps": [
+        {
+          "cmd":"df -h /data100",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"dd if=/dev/zero of=/data/bigfile bs=1M",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"df -h /data100",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"tune2fs -l /dev/vg_data100/lv_data100 |grep resize_inode",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lvdisplay /dev/vgdata/lvdata",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vgdisplay /dev/vgdata",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lvresize --resizefs --size +1GB /dev/vg_data100/lv_data100",
+          "why":"Option 1"
+        },
+        {
+          "cmd":"lvextend -L +1GB /dev/vg_data100/lv_data100",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"resize2fs -p /dev/vg_data100/lv_data100",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lvs",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"df -h /data",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Increase the size of an xfs Volume by 1GB",
+      "steps": [
+        {
+          "cmd":"df -h /data200",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"dd if=/dev/zero of=/data/bigfile bs=1M",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"df -h /data200",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lvdisplay /dev/vgdata/lvdata",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vgdisplay /dev/vgdata",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lvextend -L +1GB -r /dev/vg_data200/lv_data200",
+          "why":"Option 1"
+        },
+        {
+          "cmd":"lvextend -L +1GB /dev/vg_data200/lv_data200",
+          "why":"Option 2"
+        },
+        {
+          "cmd":"xfs_growfs /data200",
+          "why":"Option 2"
+        },
+        {
+          "cmd":"lvs",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"df -h /data200",
+          "why":"reason for running"
+        }
+      ]
+    },
+    ,
+    {
+      "task":"Decrease the size of an ext4 Volume by 1GB",
+      "steps": [
+        {
+          "cmd":"df -h /data100",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"df -h /data100",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lvdisplay /dev/vg_data100/lv_data100",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vgdisplay /dev/vg_data100",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"umount /data100",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"e2fsck -fy /dev/vg_data100/lv_data100",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lvresize --resizefs --size -1G /dev/vg_data100/lv_data100",
+          "why":"Option 1"
+        },
+        {
+          "cmd":"resize2fs /dev/vg_data100/lv_data100 700M",
+          "why":"For use with lvreduce only"
+        },
+        {
+          "cmd":"lvreduce -L 1G /dev/vg_data100/lv_data100",
+          "why":"Option 2. For use with lvreduce only"
+        },
+        {
+          "cmd":"lvreduce -L -1G /dev/vg_data100/lv_data100",
+          "why":"Option 3. For use with lvreduce only"
+        },
+        {
+          "cmd":"resize2fs /dev/vg_data100/lv_data100",
+          "why":"For use with lvreduce only"
+        },
+        {
+          "cmd":"mount -a",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lvs",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"df -h /data100",
+          "why":"reason for running"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,431 @@
+{
+  "module_name":"Managing Partitions",
+  "commands_used":[
+    {
+      "cmd":"",
+      "use":"",
+      "provided_by":"",
+      "examples":[
+        {
+          "what":"",
+          "how2":""
+        }
+      ]
+    }
+  ],
+  "config_files_used":[],
+  "additional_packages":[],
+  "tasks": [
+    {
+      "task":"Create 3 primary and 1 extended mbr partition",
+      "steps": [
+        {
+          "cmd":"lsblk",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"parted /dev/sda print",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"fdisk /dev/sda",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"m",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"n",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"p",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"1",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"<enter> accept default start block",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"+1G",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"p",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"repeat steps 4 - 10 to create 2 additional primary partitions",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"w",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"partprobe",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lsblk",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"parted /dev/sda print",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"fdisk /dev/sda",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"p",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"n",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"e",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"<enter> accept default begining sector",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"<enter> accept default ending sector",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"p",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"n",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"+1G",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"p",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"partprobe",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lsblk",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"parted /dev/sda print",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Creating GPT partitions with GDISK",
+      "steps": [
+        {
+          "cmd":"lsblk",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"parted /dev/sdb print",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"gdisk -l /dev/sdb",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"gdisk /dev/sdb",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"n",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"<enter> accept default parition number",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"<enter> accept default first sector",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"+500M",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"<enter> accept default filesystem type",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"p",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"w",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"partprobe",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lsblk",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"parted /dev/sdb print",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Create an xfs filesystem on one of the newly created partitions",
+      "steps": [
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mkfs. <tab> <tab>",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mkfs.xfs --help",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mkfs.xfs -L data001 /dev/sda1",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Create an ext4 filesystem on a logical volume on an extended partition",
+      "steps": [
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mkfs.ext4 --help",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mkfs.ext4 -L data005 /dev/sda5",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Mount and unmount data001 and data005 at runtime",
+      "steps": [
+        {
+          "cmd":"cd ~",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mount /dev/sda /mnt",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mount",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"touch /mnt/newfile.txt",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ls /mnt",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"umount /mnt",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mount -L data001 /mnt",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"umount /mnt",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mount -U <uuid> /mnt",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"umount /mnt",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mount -L data005 /mnt",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"umount /mnt",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"blkid",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"blkid /dev/sda1",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"blkid /dev/sda1 -sUUID -ovalue",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"blkid /dev/sda1 -sUUID -ovalue",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"blkid /dev/sda1 -sLABEL -ovalue",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Mount an xfs and ext4 filesystem persistently",
+      "steps": [
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vim /etc/fstab",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"/dev/sda1 /data001 xfs defaults 0 0",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"/dev/sdb1 /data005 ext4 defaults 0 0",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mount -a",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Create a swap partition",
+      "steps": [
+        {
+          "cmd":"free -mh",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lsblk -f",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"parted /dev/sdc print",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"fdisk /dev/sdc",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"n",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"+1G",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"t",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"l",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"82",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"w",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"partprobe",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mkswap /dev/sdc1",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"swapon /dev/sdc1",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vim /etc/fstab",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"/dev/sdc1 swap swap defaults 0 0",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"free -mh",
+          "why":"reason for running"
+        }
+      ]
+    }
+  ]
+}
