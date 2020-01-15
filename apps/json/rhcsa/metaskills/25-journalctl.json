@@ -1,0 +1,246 @@
+{
+  "module_name":"Metaskills - journalctl",
+  "commands_used":[
+    {
+      "cmd":"",
+      "use":"",
+      "provided_by":"",
+      "examples":[
+        {
+          "what":"",
+          "how2":""
+        }
+      ]
+    }
+  ],
+  "config_files_used":[],
+  "additional_packages":[],
+  "tasks": [
+    {
+      "task":"List the number of boot sessions available to read logs from",
+      "steps": [
+        {
+          "cmd":"journalctl --list-boots",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display all entries in todays journal",
+      "steps": [
+        {
+          "cmd":"journalctl -b 0 --since today --until now",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display all entries in todays journal with priority info",
+      "steps": [
+        {
+          "cmd":"journalctl -b 0 -p info --since today --until now",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display all entries in todays journal related to the kernel ring buffer filtered by cpu",
+      "steps": [
+        {
+          "cmd":"journalctl -b 0 --since today --until now -k |grep -i cpu",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl -b 0 --since today --until now --dmesg |grep -i cpu",
+          "why":"reason for running"
+        },
+      ]
+    },
+    {
+      "task":"Display all entries in todays journal for the auditd.service",
+      "steps": [
+        {
+          "cmd":"systemctl list-units --type service --all --state running",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl -b 0 --since today --until now -u auditd",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display all entries in todays journal for the auditd.service filtered by emergency priority",
+      "steps": [
+        {
+          "cmd":"systemctl list-units --type service --all --state running",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl -b 0 -p emerg --since today --until now -u auditd",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display all entries in todays journal for the auditd.service filtered by alert priority",
+      "steps": [
+        {
+          "cmd":"systemctl list-units --type service --all --state running",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl -b 0 -p alert --since today --until now -u auditd",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display all entries in todays journal for the auditd.service filtered by critical priority",
+      "steps": [
+        {
+          "cmd":"systemctl list-units --type service --all --state running",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl -b 0 -p crit --since today --until now -u auditd",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display all entries in todays journal for the auditd.service filtered by error priority",
+      "steps": [
+        {
+          "cmd":"systemctl list-units --type service --all --state running",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl -b 0 -p err --since today --until now -u auditd",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display all entries in todays journal for the auditd.service filtered by warning priority",
+      "steps": [
+        {
+          "cmd":"systemctl list-units --type service --all --state running",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl -b 0 -p warning --since today --until now -u auditd",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display all entries in todays journal for the auditd.service filtered by notice priority",
+      "steps": [
+        {
+          "cmd":"systemctl list-units --type service --all --state running",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl -b 0 -p notice --since today --until now -u auditd",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display all entries in todays journal for the auditd.service filtered by info priority",
+      "steps": [
+        {
+          "cmd":"systemctl list-units --type service --all --state running",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl -b 0 -p info --since today --until now -u auditd",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display all entries in todays journal for the auditd.service filtered by notice priority",
+      "steps": [
+        {
+          "cmd":"systemctl list-units --type service --all --state running",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl -b 0 -p notice --since today --until now -u auditd",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display all entries in todays journal for the auditd.service filtered by info priority. Follow the log in realtime.",
+      "steps": [
+        {
+          "cmd":"systemctl list-units --type service --all --state running",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl -b 0 -p info --since today --until now -u auditd -f",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display all entries in todays journal for the auditd.service filtered by info priority. Display results in json then plain text",
+      "steps": [
+        {
+          "cmd":"systemctl list-units --type service --all --state running",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl -b 0 -p info --since today --until now -u auditd -o json",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl -b 0 -p info --since today --until now -u auditd -o json-pretty",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl -b 0 -p info --since today --until now -u auditd -o cat",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"List the available PIDs, UIDs, and GIDs that have log entries in the system journal",
+      "steps": [
+        {
+          "cmd":"journalctl -F _PID",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl -F _UID",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl -F _GID",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display all entries in todays journal for any PID. Filter by error and follow in realtime",
+      "steps": [
+        {
+          "cmd":"journalctl -b 0 -p err --since today --until now _PID=1 -f",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display all entries in todays journal for /bin/bash. Filter by error and follow in realtime",
+      "steps": [
+        {
+          "cmd":"journalctl -b 0 -p err --since today --until now /bin/bash -f",
+          "why":"reason for running"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "module_name":"Configuring Logging",
+  "commands_used":[
+    {
+      "cmd":"",
+      "use":"",
+      "provided_by":"",
+      "examples":[
+        {
+          "what":"",
+          "how2":""
+        }
+      ]
+    }
+  ],
+  "config_files_used":[],
+  "additional_packages":[],
+  "tasks": [
+    {
+      "task":"Configuring rsyslog logging",
+      "steps": [
+        {
+          "cmd":"systemctl status rsyslog",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cat /var/log/rsyslog.conf |less",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"tail -f /var/log/messages",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"logger hello",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Working with journald",
+      "steps": [
+        {
+          "cmd":"cat /etc/systemd/journald.conf |less",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl -b",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl --since=yesterday",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl <tab> <tab>",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mkdir /var/log/journal",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl restart systemd-journald",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Working with logrotate",
+      "steps": [
+        {
+          "cmd":"vim /etc/logrotate.conf",
+          "why":"reason for running"
+        }
+      ]
+    }
+  ]
+}

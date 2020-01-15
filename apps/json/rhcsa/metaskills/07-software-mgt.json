@@ -1,0 +1,227 @@
+{
+  "module_name":"Metaskills - Software Management",
+  "commands_used":[
+    {
+      "cmd":"",
+      "use":"",
+      "provided_by":"",
+      "examples":[
+        {
+          "what":"",
+          "how2":""
+        }
+      ]
+    }
+  ],
+  "config_files_used":[],
+  "additional_packages":[],
+  "tasks": [
+    {
+      "task":"List all installed packages",
+      "steps": [
+        {
+          "cmd":"yum list installed",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Determine if the dracut.x86_64 package is installed",
+      "steps": [
+        {
+          "cmd":"yum list installed |grep dracut.x86_64",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Read a quick summary of what the dracut.x86_64 package does",
+      "steps": [
+        {
+          "cmd":"yum info dracut.x86_64",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"List all files installed by the dracut.x86_64 package",
+      "steps": [
+        {
+          "cmd":"rpm -ql dracut.x86_64",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"List all config and log files used by the dracut.x86_64 package",
+      "steps": [
+        {
+          "cmd":"rpm -qc dracut.x86_64",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"List all documentation including man pages of the dracut.x86_64 package",
+      "steps": [
+        {
+          "cmd":"rpm -qd dracut.x86_64",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Determine which package file /usr/lib/dracut/skipcpio belongs to",
+      "steps": [
+        {
+          "cmd":"rpm -qf /usr/lib/dracut/skipcpio",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Search all repos for bash completion in either the package name or summary",
+      "steps": [
+        {
+          "cmd":"yum search bash completion",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"determine what packages provides bash-completion",
+      "steps": [
+        {
+          "cmd":"yum whatprovides bash-completion",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Install the bash-completion-2.1-6.el7.noarch package",
+      "steps": [
+        {
+          "cmd":"yum install bash-completion-2.1-6.el7.noarch -v",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Remove the bash-completion-2.1-6.el7.noarch package",
+      "steps": [
+        {
+          "cmd":"yum remove bash-completion-2.1-6.el7.noarch",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"List all group based software packages",
+      "steps": [
+        {
+          "cmd":"yum group list",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"List all hidden group based software",
+      "steps": [
+        {
+          "cmd":"yum group list hidden",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"List summary on software group \"Server with GUI\"",
+      "steps": [
+        {
+          "cmd":"yum group info \"Server with GUI\"",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Install group package \"Server with GUI\"",
+      "steps": [
+        {
+          "cmd":"yum group install \"Server with GUI\"",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Clear the yum repo cache",
+      "steps": [
+        {
+          "cmd":"yum clean all",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Rebuild the cached repo hostfile",
+      "steps": [
+        {
+          "cmd":"yum repolist",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"List all packages available in all repos",
+      "steps": [
+        {
+          "cmd":"yum list available",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"List only packages available in 1 selected repo",
+      "steps": [
+        {
+          "cmd":"yum --disablerepo=\"*\" --enablerepo=\"<reponame>\" list available",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Add a repository",
+      "steps": [
+        {
+          "cmd":"command to run",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Create a local repository",
+      "steps": [
+        {
+          "cmd":"command to run",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Create a remote repository server",
+      "steps": [
+        {
+          "cmd":"command to run",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Create an rpm package",
+      "steps": [
+        {
+          "cmd":"command to run",
+          "why":"reason for running"
+        }
+      ]
+    }
+  ]
+}

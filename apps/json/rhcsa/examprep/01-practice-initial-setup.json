@@ -1,0 +1,714 @@
+{
+  "module_name":"Practice Exam",
+  "commands_used":[
+    {
+      "cmd":"",
+      "use":"",
+      "provided_by":"",
+      "examples":[
+        {
+          "what":"",
+          "how2":""
+        }
+      ]
+    }
+  ],
+  "config_files_used":[
+    {
+      "filename":"",
+      "location":"",
+      "use":"",
+      "mod_by_user":"",
+      "mod_by_kernel":""
+    }
+  ],
+  "additional_packages":[
+    {
+      "name":"",
+      "repo":""
+    }
+  ],
+  "tasks": [
+    {
+      "task":"Change root password to newuser",
+      "steps": [
+        {
+          "cmd":"from grub menu press 'e'",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"at the end of linux16 line type 'rd.break'",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ctl + x",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mount -o remount,rw /sysroot",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"chroot sysroot",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"passwd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"touch /.autorelabel",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ctl + d",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ctl + d",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Modify the grub boot loader to show messages on bootup",
+      "steps": [
+        {
+          "cmd":"vi /etc/default/grub",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"on GRUB_CMDLINE_LINUX remove quiet",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"grub2-mkconfig -o /boot/grub2/grub.cfg",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"shutdown -r now",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Set a password on the grub boot menu",
+      "steps": [
+        {
+          "cmd":"vi /etc/grub.d/40_custom",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"G",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"o",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"set superusers=\"root\"",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"esc",
+          "why":"reason for running"
+        },
+        {
+          "cmd":":r! grub2-mkpasswd-pbkdf2 + <enter>",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"pass1 + <enter>",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"pass2 + <enter>",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"wq",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"grub2-mkconfig -o /boot/grub2/grub.cfg",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl isolate reboot.target",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Mask the iptables service",
+      "steps": [
+        {
+          "cmd":"systemctl mask iptables.service",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl mask ip6tables.service",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Setup networking ipv4 address 192.168.33.5/24 with gateway and dns at 192.168.33.4",
+      "steps": [
+        {
+          "cmd":"ip a",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ip link show",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ethtool eth0",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ip route show",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"nmcli device status",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"nmcli connection show",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"nmcli connection add con-name eth0 ifname eth0 type ethernet ip4 192.168.33.2/24 gw4 192.168.33.4",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"nmcli connection modify eth0 ipv4.dns 192.168.33.4",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"nmcli connection modify eth0 ipv4.method manual",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"nmcli connection modify eth0 connection.autoconnect true",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"nmcli connection down eth0",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"nmcli connection up eth0",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"nmcli device status",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"nmcli connection show",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ip a",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ip route show",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ping 8.8.8.8",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cat /etc/resolv.conf",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cat /etc/sysconfig/network-scripts/ifcfg-eth0",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Setup hostname client.vdigi.com",
+      "steps": [
+        {
+          "cmd":"hostnamectl set-hostname client.vdigi.com",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cat /etc/hostname",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Config NTP using server ipa.vdigi.local. Make sure it is persistent",
+      "steps": [
+        {
+          "cmd":"vi /etc/chrony.conf",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"server ipa.vdigi.local iburst",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl restart chronyd",
+          "why":"reason for running"
+        },
+        ,
+        {
+          "cmd":"systemctl enable chronyd",
+          "why":"reason for running"
+        },
+        ,
+        {
+          "cmd":"chronyc sources -V",
+          "why":"reason for running"
+        },
+        ,
+        {
+          "cmd":"timedatectl status",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Enable IP Forwarding. Make it persistent.",
+      "steps": [
+        {
+          "cmd":"vim /etc/sysctl.conf",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"net.ipv4.ip_forward = 1",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"sysctl -p",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"reboot",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Set selinux to enforcing (make persistent)",
+      "steps": [
+        {
+          "cmd":"getenforce",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vim /etc/sysconfig/selinux",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"SELINUX=enforcing",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"reboot",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"getenforce",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Configure a yum repository with repourl http://ins.vdigi.local/centos7/. Name it vdigi-base.",
+      "steps": [
+        {
+          "cmd":"yum repolist",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cd /etc/yum.repos.d",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ls",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vim vdigibase.repo",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"i",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"[vdigi-base]",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"name=Repoistory for the vdigi.local domain",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"baseurl=http://ins.vdigi.local/centos7/",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"enabled=1",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"gpgcheck=1",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-CentOS-7",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"esc",
+          "why":"reason for running"
+        },
+        {
+          "cmd":":wq",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum clean all",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum list all",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum repolist",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum info subversion",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Create and configure a local yum repository",
+      "steps": [
+        {
+          "cmd":"yum list installed |grep createrepo",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum list installed |grep yumdownloader",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum install createrepo (if not installed)",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum install yum-utils (if not installed)",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mkdir /local-repo",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cd /local-repo",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yumdownloader n*",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"createrepo /local-repo",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cd /etc/yum.repos.d",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ls",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vim Local-Repo.repo",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"i",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"[myrepo]",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"name=my demo repository",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"baseurl=file:///repo",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"gpgcheck=0",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"esc",
+          "why":"reason for running"
+        },
+        {
+          "cmd":":wq",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum clean all",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum list all",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum repolist",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Install Kernel Update from http://ins.vdigi.local/kernel. Use http://ins.vdigi.local/kernel/gpgkey/RPM-GPG-KEY-ELREPO for verification. Ensure the updated kernel is the default when system is booted. Ensure the original kernel remains available and bootable on the system.",
+      "steps": [
+        {
+          "cmd":"uname -msr",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cat /etc/os-release",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cat /etc/redhat-release",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cat /proc/version",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"awk -F\\' '$1==\"menuentry \" {print i++ \" : \" $2}' /etc/grub2.cfg",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cd /etc/pki/rpm-gpg",
+          "why":""
+        },
+        {
+          "cmd":"curl -O http://ins.vdigi.local/kernel/gpgkey/RPM-GPG-KEY-ELREPO",
+          "why":""
+        },
+        {
+          "cmd":"yum repolist",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cd /etc/yum.repos.d",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ls",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"touch vdigikernel.repo",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"i",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"[vdigi-kernel]",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"name=Kernel Update Repository for vdigi.local domain",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"baseurl=http://ins.vdigi.local/kernel",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"enabled=1",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"gpgcheck=1",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-ELREPO",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"esc",
+          "why":"reason for running"
+        },
+        {
+          "cmd":":wq",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum clean all",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum list all",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum repolist",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum --disablerepo=\"*\" --enablerepo=\"vdigi-kernel\" list available",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum --enablerepo=vdigi-kernel install kernel-ml",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"reboot",
+          "why":"reason for running"
+        }
+        {
+          "cmd":"awk -F\\' '$1==\"menuentry \" {print i++ \" : \" $2}' /etc/grub2.cfg",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"grub2-set-default 0",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"grub2-mkconfig -o /boot/grub2/grub.cfg",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"reboot",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"uname -msr",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Bind to LDAP server ipa.vdigi.local via the ipa client",
+      "steps": [
+        {
+          "cmd":"timedatectl",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"chronyc sources -V",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum ipa-client",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ipa-client-install",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"kinit admin",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ipa hbactest",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"getent passwd admin",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"exit",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ssh admin@client.vdigi.local",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Configure automount for ldap user home directories to nfs.vdigi.local:/home. Verify by authenticating as ldapuser1,ldapuser2,ldapuser3",
+      "steps": [
+        {
+          "cmd":"systemctl status autofs",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vim /etc/auto.master",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"/home /etc/home.map",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"touch /etc/home.map",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vim /etc/home.map",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"* -fstype=nfs,rw,nosuid,soft nfs.vdigi.local:/home/&",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl enable autofs",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl start autofs",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ssh ldapuser1@client.vdigi.local",
+          "why":"reason for running"
+        }
+      ]
+    }
+  ]
+}

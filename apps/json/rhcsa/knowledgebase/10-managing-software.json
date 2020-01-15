@@ -1,0 +1,230 @@
+{
+  "module_name":"Managing Software",
+  "commands_used":[
+    {
+      "cmd":"",
+      "use":"",
+      "provided_by":"",
+      "examples":[
+        {
+          "what":"",
+          "how2":""
+        }
+      ]
+    }
+  ],
+  "config_files_used":[],
+  "additional_packages":[],
+  "config_files_used":[],
+  "tasks": [
+    {
+      "task":"Setting up yum repositories",
+      "steps": [
+        {
+          "cmd":"yum repolist",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mkdir /repo",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cd /repo",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yumdownloader n*",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum whatprovides createrepo",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum install createrepo-0.9.9-28.el7.noarch",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"createrepo /repo",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum repolist",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cd /etc/yum.repos.d/",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"touch my.repo",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vim my.repo \' Enter the follow text line by line \'",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"[myrepo]",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"name=my demo repository",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"baseurl=file:///repo",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"gpgcheck=0",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum repolist",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Managing packages with yum",
+      "steps": [
+        {
+          "cmd":"yum list",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum list installed",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum search nmap",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum whatprovides nmap",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum install nmap",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum list installed | grep nmap",
+          "why":"reason for running"
+        },
+        ,
+        {
+          "cmd":"yum remove nmap",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum update kernel",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum history",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Using yum groups",
+      "steps": [
+        {
+          "cmd":"yum groups list | less",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum groups info \"nfs file server\" ",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum groups list hidden",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum groups install \"nfs file server\"",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Using rpm queries",
+      "steps": [
+        {
+          "cmd":"yum whatprovides bash-completion",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"rpm -qa",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"rpm -qa | grep bash-completion-2.1-6.el7.noarch",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"rpm -ql bash-completion-2.1-6.el7.noarch",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"rpm -qc bash-completion-2.1-6.el7.noarch",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"rpm -qd bash-completion-2.1-6.el7.noarch",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cd /usr/share/bash-completion-2.1-6.el7.noarch",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"rpm -qf bash_completion",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cd ~",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yumdownloader bash-completion-2.1-6.el7.noarch",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"rpm -qp bash-completion-2.1-6.el7.noarch",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"rpm -qp --scripts bash-completion-2.1-6.el7.noarch",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"rpm -qpl bash-completion-2.1-6.el7.noarch",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"rpm -qpc bash-completion-2.1-6.el7.noarch",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"rpm -qpd bash-completion-2.1-6.el7.noarch",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"repoquery httpd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"repoquery -i httpd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"repoquery -l httpd",
+          "why":"reason for running"
+        }
+      ]
+    }
+  ]
+}
