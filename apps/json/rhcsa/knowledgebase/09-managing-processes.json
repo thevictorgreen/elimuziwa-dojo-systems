@@ -1,0 +1,401 @@
+{
+  "module_name":"Managing Processes",
+  "commands_used":[
+    {
+      "cmd":"",
+      "use":"",
+      "provided_by":"",
+      "examples":[
+        {
+          "what":"",
+          "how2":""
+        }
+      ]
+    }
+  ],
+  "config_files_used":[],
+  "additional_packages":[],
+  "tasks": [
+    {
+      "task":"Create 2 shell jobs and move them between the background and foreground",
+      "steps": [
+        {
+          "cmd":"jobs",
+          "why":"shows all running jobs"
+        },
+        {
+          "cmd":"sleep 600",
+          "why":"blocks terminal until complete"
+        },
+        {
+          "cmd":"ctl z",
+          "why":"suspends foreground job"
+        },
+        {
+          "cmd":"bg",
+          "why":"moves last suspended foreground job into the background"
+        },
+        {
+          "cmd":"jobs",
+          "why":"shows all running jobs"
+        },
+        {
+          "cmd":"sleep 700 &",
+          "why":"starts a job and places it immediately in the background"
+        },
+        {
+          "cmd":"jobs",
+          "why":"shows all running jobs"
+        },
+        {
+          "cmd":"fg",
+          "why":"places last background job into the foreground"
+        },
+        {
+          "cmd":"ctl c",
+          "why":"sends sigterm 15 to job killing it gracefully"
+        },
+        {
+          "cmd":"fg",
+          "why":"places last background job into the foreground"
+        },
+        {
+          "cmd":"ctl c",
+          "why":"sends sigterm 15 to job killing it gracefully"
+        }
+      ]
+    },
+    {
+      "task":"Create a background shell job and use the ps command to get process information",
+      "steps": [
+        {
+          "cmd":"jobs",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"sleep 600 &",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ps",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"pidof sleep",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ps -aux |tail",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ps -aux |grep $(pidof sleep)",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ps -ef |grep $(pidof sleep)",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ps -fax |grep $(pidof sleep)",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"fg",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ctl + c",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Determine Current Active and Inactive Memory Usage",
+      "steps": [
+        {
+          "cmd":"free -mh",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cat /proc/meminfo|less",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cat /proc/meminfo|grep Inactive",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cat /proc/meminfo|grep Active",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"awk '$3==\"kB\"{if ($2>1024**2){$2=$2/1024**2;$3=\"GB\";} else if ($2>1024){$2=$2/1024;$3=\"MB\";}} 1' /proc/meminfo | column -t|grep Inactive",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"awk '$3==\"kB\"{if ($2>1024**2){$2=$2/1024**2;$3=\"GB\";} else if ($2>1024){$2=$2/1024;$3=\"MB\";}} 1' /proc/meminfo | column -t|grep Active",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Determine Overall System Load",
+      "steps": [
+        {
+          "cmd":"lscpu |grep CPU\\(s\\)",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"uptime",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"dd if=/dev/zero of=/dev/null &",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"dd if=/dev/zero of=/dev/null &",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"dd if=/dev/zero of=/dev/null &",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"dd if=/dev/zero of=/dev/null &",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"uptime",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"fg",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ctl + z",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"fg",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ctl + z",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Monitor System Activity",
+      "steps": [
+        {
+          "cmd":"dd if=/dev/zero of=/dev/null &",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"dd if=/dev/zero of=/dev/null &",
+          "why":"reason for running"
+        },
+        ,
+        {
+          "cmd":"dd if=/dev/zero of=/dev/null &",
+          "why":"reason for running"
+        },
+        ,
+        {
+          "cmd":"dd if=/dev/zero of=/dev/null &",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"jobs",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"uptime",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"top",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"shift + >",
+          "why":"change default sort paramter"
+        },
+        {
+          "cmd":"shift + <",
+          "why":"change default sort parameter"
+        },
+        {
+          "cmd":"f",
+          "why":"optionally change fields"
+        },
+        {
+          "cmd":"arrow and enter on value",
+          "why":"select field for addition or deletion from top UI"
+        },
+        {
+          "cmd":"q",
+          "why":"back to top UI"
+        },
+        {
+          "cmd":"W",
+          "why":"saves the layout in the home directory of the current user in a filed titled .toprc"
+        },
+        {
+          "cmd":"q",
+          "why":"quit top"
+        },
+        {
+          "cmd":"fg",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ctl + c",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"fg",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ctl + c",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"fg",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ctl + c",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"fg",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ctl + c",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"jobs",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Sending signals to processes",
+      "steps": [
+        {
+          "cmd":"dd if=/dev/zero of=/dev/null &",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"dd if=/dev/zero of=/dev/null &",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"dd if=/dev/zero of=/dev/null &",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"dd if=/dev/zero of=/dev/null &",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ps -aux |grep dd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"jobs",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"dd if=/dev/zero of=/dev/null &",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"pidof dd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"dd if=/dev/zero of=/dev/null &",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"kill -9 $(pidof dd|cut -d\' \' -f1)",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"jobs",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"top",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"k",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"enter to accept default sigterm 15",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"q",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"jobs",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"kill -15 $(pidof dd| cut -d' ' -f1)",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"kill -15 $(pidof dd| cut -d' ' -f1)",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"jobs",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Managing process Priority",
+      "steps": [
+        {
+          "cmd":"dev if=/dev/zero of=/dev/null &",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"dev if=/dev/zero of=/dev/null &",
+          "why":"reason for running"
+        }
+        {
+          "cmd":"nice -5 dd if=/dev/zero of=/dev/null &",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"renice -5 some.pid.value",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"jobs",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"for i in $(pidof dd); do kill -15 $i; done",
+          "why":"reason for running"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,135 @@
+{
+  "module_name":"Metaskills - Command Line Fu",
+  "commands_used":[
+    {
+      "cmd":"",
+      "use":"",
+      "provided_by":"",
+      "examples":[
+        {
+          "what":"",
+          "how2":""
+        }
+      ]
+    }
+  ],
+  "config_files_used":[],
+  "additional_packages":[],
+  "tasks": [
+    {
+      "task":"Move to the start of the command line.Type #this is a very long line of text to edit on the command line interface.",
+      "steps": [
+        {
+          "cmd":"control + a",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Move to the end of the command line.Type #this is a very long line of text to edit on the command line interface.",
+      "steps": [
+        {
+          "cmd":"control + e",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Move backward 1 word until the start of the command line.Type #this is a very long line of text to edit on the command line interface.",
+      "steps": [
+        {
+          "cmd":"esc + b",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Move forward 1 word until the last word.Type #this is a very long line of text to edit on the command line interface.",
+      "steps": [
+        {
+          "cmd":"esc + f",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Delete backwards 1 word. Type #this is a very long line of text to edit on the command line interface.",
+      "steps": [
+        {
+          "cmd":"control + w",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Move back 1 word until the middle of the cli and delete from the cursor to the end of the line.Type #this is a very long line of text to edit on the command line interface.",
+      "steps": [
+        {
+          "cmd":"esc + b",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"control + k",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Move back 1 word until the middle of the cli and delete from the cursor to the start of the line.Type #this is a very long line of text to edit on the command line interface.",
+      "steps": [
+        {
+          "cmd":"esc + b",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"control + u",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Delete a single character.Type #this is a very long line of text to edit on the command line interface.",
+      "steps": [
+        {
+          "cmd":"esc + b",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"control + d",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Clear the screen",
+      "steps": [
+        {
+          "cmd":"control + l",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Terminate a command",
+      "steps": [
+        {
+          "cmd":"control + c",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Search history backwards"
+      "steps": [
+        {
+          "cmd":"control + r",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"control + d",
+          "why":"reason for running"
+        }
+      ]
+    }
+  ]
+}

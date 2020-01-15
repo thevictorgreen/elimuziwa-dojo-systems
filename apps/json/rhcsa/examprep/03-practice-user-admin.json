@@ -1,0 +1,241 @@
+{
+  "module_name":"Troubleshooting",
+  "commands_used":[
+    {
+      "cmd":"",
+      "use":"",
+      "provided_by":"",
+      "examples":[
+        {
+          "what":"",
+          "how2":""
+        }
+      ]
+    }
+  ],
+  "config_files_used":[],
+  "additional_packages":[],
+  "tasks": [
+    {
+      "task":"Create the following user, group, and group memberships. Group named sysgroup, user andrew who belongs to the sysgroup as a secondary group, user susan who belongs to the sysgroup as a secondary group, user sarah who has no interactive shell and is not apart of the sysgroup. Password for all users = newuser",
+      "steps": [
+        {
+          "cmd":"groupadd sysgrp",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"useradd andrew",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"useradd susan",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"useradd -s /sbin/nlogin sarah",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"usermod -aG sysgrp andrew",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"usermod -aG sysgrp susan",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"id andrew",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"id susan",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"id sarah",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"su - sarah",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Create a user julice",
+      "steps": [
+        {
+          "cmd":"useradd julice",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"id julice",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Create a user talusan with userid 2985",
+      "steps": [
+        {
+          "cmd":"useradd -u 2985 talusan",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"id talusan",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Create a collaborative directory /redhat/sysgrp owned by group sysgrp, read, writable, accessible by sysgrp only.",
+      "steps": [
+        {
+          "cmd":"mkdir -p /redhat/sysgrp",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"chgrp sysgrp /redhat/sysgrp",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"chmod 2700 /redhat/sysgrp",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ls -ld /redhat/sysgrp",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"command to run",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"command to run",
+          "why":"reason for running"
+        },
+      ]
+    },
+    {
+      "task":"copy file /etc/fstab into /var/tmp. Owned by root and group root not executable by anyone. User andrew can read / write. susan has no access. all other users now or future can read.",
+      "steps": [
+        {
+          "cmd":"cp /etc/fstab /var/tmp",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"chown root:root /var/tmp/fstab",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"setfacl -m u:andrew:rw- /var/tmp/fstab",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"setfactl -m u:susan:--- /var/tmp/fstab",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"setfacl -m o::r-- /var/tmp/fstab",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"getfacl /var/tmp/fstab",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Find all files owned by user julice and copy them into /root/findresults directory",
+      "steps": [
+        {
+          "cmd":"mkdir -p /root/findresults",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"find / -user julice -exec cp -rfp {} /root/findresults/ \\;",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Search the string sarah in the /etc/passwd file and save the output in /root/lines",
+      "steps": [
+        {
+          "cmd":"grep sarah /etc/passwd > /root/lines",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cat lines",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"User andrew must configure a cronjob that runs at 14:23 and executes /bin/echo hiya",
+      "steps": [
+        {
+          "cmd":"systemctl status crond",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"crontab -eu andrew",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"23 14 * * * /bin/echo hiya",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"crontab -el andrew",
+          "why":"reason for running"
+        },
+      ]
+    },
+    {
+      "task":"Create an archive of /usr/local in /root/local.tgz compressed with gzip",
+      "steps": [
+        {
+          "cmd":"tar -cvzf /root/local.tgz /usr/local",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Create a user named devops",
+      "steps": [
+        {
+          "cmd":"",
+          "why":""
+        }
+      ]
+    },
+    {
+      "task":"Grant the user devops sudo priviledges",
+      "steps": [
+        {
+          "cmd":"",
+          "why":""
+        }
+      ]
+    },
+    {
+      "task":"Configure password-less ssh access for user devops",
+      "steps": [
+        {
+          "cmd":"",
+          "why":""
+        }
+      ]
+    },
+    {
+      "task":"Configure password-less sudo for user devops",
+      "steps": [
+        {
+          "cmd":"",
+          "why":""
+        }
+      ]
+    }
+  ]
+}

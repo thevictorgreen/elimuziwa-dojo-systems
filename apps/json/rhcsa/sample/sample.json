@@ -1,0 +1,95 @@
+{
+  "module_name":"Managing processes",
+  "tasks": [
+    {
+      "task":"Create a shell job and move it between the background and foreground",
+      "steps": [
+        {
+          "cmd":"jobs",
+          "why":"shows all running jobs"
+        },
+        {
+          "cmd":"sleep 600",
+          "why":"blocks terminal until complete"
+        },
+        {
+          "cmd":"ctl z",
+          "why":"suspends foreground job"
+        },
+        {
+          "cmd":"bg",
+          "why":"moves last suspended foreground job into the background"
+        },
+        {
+          "cmd":"jobs",
+          "why":"shows all running jobs"
+        },
+        {
+          "cmd":"sleep 700 &",
+          "why":"starts a job and places it immediately in the background"
+        },
+        {
+          "cmd":"jobs",
+          "why":"shows all running jobs"
+        },
+        {
+          "cmd":"fg",
+          "why":"places last background job into the foreground"
+        },
+        {
+          "cmd":"ctl c",
+          "why":"sends sigterm 15 to job killing it gracefully"
+        },
+        {
+          "cmd":"fg",
+          "why":"what?"
+        }
+      ]
+    },
+    {
+      "task":"Create a shell job and move it between the background and foreground",
+      "steps": [
+        {
+          "cmd":"jobs",
+          "why":"shows all running jobs"
+        },
+        {
+          "cmd":"sleep 600",
+          "why":"blocks terminal until complete"
+        },
+        {
+          "cmd":"ctl z",
+          "why":"suspends foreground job"
+        },
+        {
+          "cmd":"bg",
+          "why":"moves last suspended foreground job into the background"
+        },
+        {
+          "cmd":"jobs",
+          "why":"shows all running jobs"
+        },
+        {
+          "cmd":"sleep 700 &",
+          "why":"starts a job and places it immediately in the background"
+        },
+        {
+          "cmd":"jobs",
+          "why":"shows all running jobs"
+        },
+        {
+          "cmd":"fg",
+          "why":"places last background job into the foreground"
+        },
+        {
+          "cmd":"ctl c",
+          "why":"sends sigterm 15 to job killing it gracefully"
+        },
+        {
+          "cmd":"fg",
+          "why":"what?"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,349 @@
+{
+  "module_name":"Security Hardening",
+  "commands_used":[
+    {
+      "cmd":"",
+      "use":"",
+      "provided_by":"",
+      "examples":[
+        {
+          "what":"",
+          "how2":""
+        }
+      ]
+    }
+  ],
+  "config_files_used":[],
+  "additional_packages":[],
+  "tasks": [
+    {
+      "task":"Set selinux to enforcing (make persistent)",
+      "steps": [
+        {
+          "cmd":"getenforce",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vim /etc/sysconfig/selinux",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"SELINUX=enforcing",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"reboot",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"getenforce",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Make iptables persistent",
+      "steps": [
+        {
+          "cmd":"yum whatprovides iptables-services",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum install iptables-services",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl enable iptables",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl start iptables",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl status iptables",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vi /etc/sysconfig/iptables-config",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"IPTABLES_SAVE_ON_STOP=\"no\"",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"IPTABLES_SAVE_ON_RESTART=\"no\"",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"iptables -S INPUT",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"reboot",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"iptables -S INPUT",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Create a default accept firewall policy allowing ssh from any network. Log all new ssh sessions and new dropped packets to a separate file",
+      "steps": [
+        {
+          "cmd":"vi /etc/sysconfig/iptables",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"*filter",
+          "why":"reason for running"
+        },
+        {
+          "cmd":":INPUT ACCEPT [0:0]",
+          "why":"reason for running"
+        },
+        {
+          "cmd":":FORWARD ACCEPT [0:0]",
+          "why":"reason for running"
+        },
+        {
+          "cmd":":OUTPUT ACCEPT [0:0]",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"-A INPUT -i eth0 -p tcp -m tcp -s 192.168.33.1/24 --dport 22 -m state --state NEW -m comment --comment \"iptables:ssh \" -j LOG --log-prefix \"iptables:ssh \" --log-level 4",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"-A INPUT -i eth0 -p tcp -m tcp -s 192.168.33.1/24 --dport 22 -m state --state NEW,ESTABLISHED,RELATED -m comment --comment \"iptables:ssh \" -j ACCEPT",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"-A INPUT -m state --state NEW -j LOG --log-prefix \"iptables:dropped \" --log-level 4",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"-A INPUT -j DROP",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"-A OUTPUT -o eth0 -p tcp -m tcp -d 192.168.33.1/24 --sport 22 -m state --state ESTABLISHED,RELATED -m comment --comment \"iptables:ssh \" -j ACCEPT",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"-A OUTPUT -j DROP",
+          "why":"reason for running"
+        }
+        {
+          "cmd":"vi /etc/rsyslog.d/10-iptables.conf",
+          "why":"reason for running"
+        },
+        {
+          "cmd":":msg, contains, \"iptables:ssh \" -/var/log/iptables/ssh.log",
+          "why":"reason for running"
+        },
+        {
+          "cmd":":msg, contains, \"iptables:dropped \" -/var/log/iptables/dropped.log",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"& ~",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl restart rsyslog",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl restart iptables",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"reboot",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"tail /var/log/iptables/ssh.log",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Find and diagnose most recent Selinux Policy violations",
+      "steps": [
+        {
+          "cmd":"yum whatprovides ausearch",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum install audit-2.7.6-3.el7.x86_64",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum whatprovides sealert",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum install setroubleshoot-server-3.2.28-3.el7.x86_64",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum whatprovides semanage",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum install policycoreutils-python-2.5-17.1.el7.x86_64",
+          "why":"reason for running"
+        },
+
+        {
+          "cmd":"ausearch -m AVC,USER_AVC -ts recent",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl -t setroubleshoot --since= [time]",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"sealert -l [message_ID]",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Install and configure apache to run on port 8043 and serve pages from /www/srv/html. Adjust SElinux and iptables where needed.",
+      "steps": [
+        {
+          "cmd":"yum whatprovides httpd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"yum install httpd-2.4.6-67.el7.centos.x86_64",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl status httpd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl enable httpd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl start httpd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"netstat -lptn",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vim /etc/httpd/conf/httpd.conf",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"Listen 8043",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl stop httpd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl start httpd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"ausearch -m AVC,USER_AVC -ts recent",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl -t setroubleshoot --since [date]",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl -xe",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"semanage port -l |grep httpd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"semanage port -a -p tcp 8043 -t http_port_t",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"semanage port -l |grep httpd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl start httpd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"curl http://localhost:8043",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl stop httpd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"mkdir -p /www/srv",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"touch /www/srv/index.html",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"echo \"hello\" >> /www/srv/index.html",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vim /etc/httpd/conf/httpd.conf",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"DocumentRoot /www/srv",
+          "why":"reason for running"
+        },{
+          "cmd":"systemctl start httpd",
+          "why":"reason for running"
+        },{
+          "cmd":"curl http://localhost:8043",
+          "why":"reason for running"
+        },{
+          "cmd":"ausearch -m AVC,USER_AVC -ts recent",
+          "why":"reason for running"
+        },{
+          "cmd":"journalctl -xe",
+          "why":"reason for running"
+        },{
+          "cmd":"semanage fcontext -l |grep /var/www/html",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"semanage fcontext -a -t httpd_sys_rw_content_t \"/www/srv(/.*)?\"",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"restorecon -Rv /www/srv/",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl restart httpd",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"curl http://localhost:8043",
+          "why":"reason for running"
+        }
+      ]
+    }
+  ]
+}

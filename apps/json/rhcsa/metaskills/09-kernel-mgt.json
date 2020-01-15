@@ -1,0 +1,306 @@
+{
+  "module_name":"Metaskills - Kernel Management",
+  "commands_used":[
+    {
+      "cmd":"",
+      "use":"",
+      "provided_by":"",
+      "examples":[
+        {
+          "what":"",
+          "how2":""
+        }
+      ]
+    }
+  ],
+  "config_files_used":[],
+  "additional_packages":[],
+  "tasks": [
+    {
+      "task":"Use the kernel ring buffer to filter hardware related messages.",
+      "steps": [
+        {
+          "cmd":"dmesg |grep -i tty",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"dmesg |grep -i cpu",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"dmesg |grep -i memory",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"dmesg |grep -i network",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"dmesg |grep -i eth0",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"dmesg |grep -i bluetooth",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"dmesg |grep -i usb",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"dmesg |grep -i pci",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"dmesg |grep -i sda",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"cat /var/log/dmesg | grep -i network",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"journalctl -k |grep -i eth0",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Name 2 other tools used to find kernel messages",
+      "steps": [
+        {
+          "cmd":"ls /proc",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"uname",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Monitor Hardware events",
+      "steps": [
+        {
+          "cmd":"udevadm monitor",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"List all currently loaded kernel modules",
+      "steps": [
+        {
+          "cmd":"lsmod",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display information about currently loaded kernel module",
+      "steps": [
+        {
+          "cmd":"modinfo ip_tables",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Unload kernel module considering dependencies.",
+      "steps": [
+        {
+          "cmd":"modprobe -r ip_tables",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Load kernel module considering dependencies",
+      "steps": [
+        {
+          "cmd":"modprobe ip_tables",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Display parameter values on the libata kernel module",
+      "steps": [
+        {
+          "cmd":"systool -vm libata",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Adjust the xa_test parameter of the sr_mod kernel module to 1 runtime only",
+      "steps": [
+        {
+          "cmd":"systool -vm sr_mod",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lsmod |grep sr_mod",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"modprobe -r sr_mod",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"modinfo sr_mod|grep parm:",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"modprobe sr_mod xa_test=1",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"sytool -vm sr_mod",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Adjust the xa_test parameter of the sr_mod kernel module to 2 runtime and persistenly",
+      "steps": [
+        {
+          "cmd":"systool -vm sr_mod",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"lsmod |grep sr_mod",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"modprobe -r sr_mod",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"modinfo sr_mod|grep parm:",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"modprobe sr_mod xa_test=1",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"sytool -vm sr_mod",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"touch /etc/modprobe.d/sr_mod.conf",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"options sr_mod xa_test=1",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl isolate reboot.target",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systool -vm sr_mod",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"List the primary sections for kernel tunables",
+      "steps": [
+        {
+          "cmd":"ls -l /proc/sys",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Turn on ip forwarding in the kernel. Make it persistent",
+      "steps": [
+        {
+          "cmd":"/cat/proc/sys/net/ipv4/ip_forward",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"vim /etc/sysctl.conf",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"net.ipv4.ip_forward=1",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systctl -p",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systctl --system",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"systemctl isolate reboot.target",
+          "why":"reason for running"
+        },
+        {
+          "cmd":"/cat/proc/sys/net/ipv4/ip_forward",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Name of task",
+      "steps": [
+        {
+          "cmd":"command to run",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Name of task",
+      "steps": [
+        {
+          "cmd":"command to run",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Name of task",
+      "steps": [
+        {
+          "cmd":"command to run",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Name of task",
+      "steps": [
+        {
+          "cmd":"command to run",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Name of task",
+      "steps": [
+        {
+          "cmd":"command to run",
+          "why":"reason for running"
+        }
+      ]
+    },
+    {
+      "task":"Name of task",
+      "steps": [
+        {
+          "cmd":"command to run",
+          "why":"reason for running"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "module_name":"Metaskills - grep",
+  "commands_used":[
+    {
+      "cmd":"",
+      "use":"",
+      "provided_by":"",
+      "examples":[
+        {
+          "what":"",
+          "how2":""
+        }
+      ]
+    }
+  ],
+  "config_files_used":[],
+  "additional_packages":[],
+  "tasks": [
+    {
+      "task":"Name of task",
+      "steps": [
+        {
+          "cmd":"command to run",
+          "why":"reason for running"
+        }
+      ]
+    }
+  ]
+}
